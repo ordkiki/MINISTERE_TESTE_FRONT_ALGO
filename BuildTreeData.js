@@ -30,7 +30,7 @@ function BuildTree(parent_id, data)
     const parent = data.find(element => element.id === parent_id);
     const Tree = 
     {
-        id: parent_id, ...data[i],
+        id: parent_id,
         name: parent ? parent.name : "",
         children: []
     };
