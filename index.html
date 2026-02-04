@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Hiérarchie Organisationnelle</title>
+</head>
+
+<body  class="bg-gray-50">
+    <main class="flex ">
+    <!-- sidebar -->
+    <section class="sidebar w-[15dvw] h-screen bg-white border-r border-gray-300 p-5 relative" id="sidebar">
+      <h1 class="flex items-center text-yellow-500 font-semibold mb-12">
+        <button id="close-sidebar">
+            <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-warehouse-icon lucide-warehouse"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11"/><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z"/><path d="M6 13h12"/><path d="M6 17h12"/></svg>
+
+        </button>
+        <span class="hidden lg:block">Services</span>
+        </h1>
+      <button class="absolute top-8 -right-8 bg-gray-100 p-2 rounded-full border m-4 hover:bg-gray-200">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-first-icon lucide-chevron-first"><path d="m17 18-6-6 6-6"/><path d="M7 6v12"/></svg>
+      </button>
+    </section>
+    <!-- ito le liste -->
+    <section  class="w-full liste des services h-screen overflow-y-scroll">
+      <article class="header bg-white p-4 border-b ">
+        <h1 class="font-semibold text-blue-500">Hiérarchie Organisationnelle</h1>
+      </article>
+
+      <div class="p-4  my-4">
+        <div class="border  bg-white search-box">
+          <input type="text" id="searchInput" class="w-full outline-none p-2" placeholder="Rechercher un département ou service...">
+        </div>
+
+        <div class="my-4 p-4 tree-container bg-white border rounded-md shadow-sm" id="treeContainer">
+        
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <script src="./BuildTreeData.js"></script>
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    var isOpenSidebar = true;
+    const closeSidebarBtn = document.getElementById('close-sidebar');
+    closeSidebarBtn.addEventListener('click', CloseSidebar);
+    const treeContainer = document.getElementById('treeContainer');
+    const treeLi = document.createElement('li');
+    treeLi.classList.add('bg-white', 'p-2', 'rounded-md', 'shadow-sm');
+    const rendered = renderTree(Tree, treeLi);
+    treeContainer.appendChild(rendered);
+
+    window.close = function() {
+      document.querySelectorAll('.toggle-btn:not(.collapsed)').forEach(btn => {
+        btn.click();
+      });
+    };
+
+    window.open = function() {
+      document.querySelectorAll('.toggle-btn.collapsed').forEach(btn => {
+        btn.click();
+      });
+    };
+
+    function CloseSidebar() {
+        if (isOpenSidebar) {
+            isOpenSidebar = false;
+            sidebar.className = 'w-[5vw] h-screen bg-white border-r border-gray-300 p-5 relative';
+            return;
+        }
+        sidebar.className = 'w-[15vw] h-screen bg-white border-r border-gray-300 p-5 relative';
+    }
+
+    
+  </script>
+</body>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</html>
+
