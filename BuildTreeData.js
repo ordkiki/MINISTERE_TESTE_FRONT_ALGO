@@ -11,7 +11,7 @@ const data = [
     { "id": 10, "name": "Service Communication", "parent_id": 5 }
 ]
 
-
+// Recherche de la racine
 function SearchRoot(data)
 {
     var root = {};
@@ -24,6 +24,7 @@ function SearchRoot(data)
     return root;
 }
 
+// Construction de l'arbre
 function BuildTree(parent_id, data)
 {
     const parent = data.find(element => element.id === parent_id);
